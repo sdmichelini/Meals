@@ -4,7 +4,7 @@ import MealConstants from '../constants/MealConstants';
 it('should return initial state', ()=>{
   expect(
     MealReducer(undefined, {})
-  ).toEqual([]);
+  ).toEqual({meals: []});
 });
 
 it('should add a meal', ()=>{
@@ -13,7 +13,7 @@ it('should add a meal', ()=>{
       type: MealConstants.ADD_MEALS,
       meals: [{name: 'Penne'}]
     })
-  ).toEqual([{name: 'Penne'}]);
+  ).toEqual({meals:[{name: 'Penne'}]});
 });
 
 it('should add multiple meals', ()=>{
@@ -22,34 +22,34 @@ it('should add multiple meals', ()=>{
       type: MealConstants.ADD_MEALS,
       meals: [{name: 'Penne'},{name:'Chicken'}]
     })
-  ).toEqual([{name: 'Penne'},{name:'Chicken'}]);
+  ).toEqual({meals:[{name: 'Penne'},{name:'Chicken'}]});
 });
 
 it('should edit a meals name', ()=>{
   expect(
-    MealReducer([{name: 'Penne', _id:1}], {
+    MealReducer({meals:[{name: 'Penne', _id:1}]}, {
       type: MealConstants.EDIT_MEAL,
       id: 1,
       name: 'Chicken'
     })
-  ).toEqual([{name: 'Chicken', _id:1}]);
+  ).toEqual({meals:[{name: 'Chicken', _id:1}]});
 });
 
 it('should not edit a meal if meal id not found', ()=>{
   expect(
-    MealReducer([{name: 'Penne', _id:1}], {
+    MealReducer({meals:[{name: 'Penne', _id:1}]}, {
       type: MealConstants.EDIT_MEAL,
       id: 2,
       name: 'Chicken'
     })
-  ).toEqual([{name: 'Penne', _id:1}]);
+  ).toEqual({meals:[{name: 'Penne', _id:1}]});
 });
 
 it('should delete a meal', ()=>{
   expect(
-    MealReducer([{name: 'Penne', _id:1}], {
+    MealReducer({meals:[{name: 'Penne', _id:1}]}, {
       type: MealConstants.DELETE_MEAL,
       id: 1
     })
-  ).toEqual([]);
+  ).toEqual({meals:[]});
 });
