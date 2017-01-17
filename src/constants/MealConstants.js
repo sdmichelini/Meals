@@ -8,4 +8,6 @@ export default keyMirror({
   DELETE_MEAL: null,
   LOAD_MEALS: null,
   LOAD_MEALS_ERROR: null,
+  DELETE_MEAL_FROM_SERVER: null,
+  DELETE_MEAL_FROM_SERVER_ERROR: null
 });

@@ -21,5 +21,14 @@ export default {
           resolve(JSON.parse(response.text));
         });
     });
+  },
+  deleteMeal: (id) => {
+    return new Promise((resolve, reject) => {
+      request.delete(URL+'/api/meals/'+id)
+        .end((err,response) => {
+          if(err) reject(JSON.parse(response.text));
+          resolve(JSON.parse(response.text));
+        });
+    });
   }
 }

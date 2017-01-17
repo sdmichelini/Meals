@@ -19,6 +19,7 @@ export function addMealToServer(meal) {
     dispatch({
       type: MealConstants.ADD_MEAL_TO_SERVER
     });
+    // Use the API to add the meals
     MealsApi.addMeal(meal)
       .then((response) => {
         dispatch(addMeals([response.meal]));
@@ -53,6 +54,27 @@ export function deleteMeal(id) {
     type: MealConstants.DELETE_MEAL,
     id: id
   }
+}
+/*
+  Delete a meal from the server
+*/
+export function deleteMealFromServer(id) {
+  return ((dispatch) => {
+    console.log(id);
+    dispatch({
+      type: MealConstants.DELETE_MEAL_FROM_SERVER
+    });
+    MealsApi.deleteMeal(id)
+      .then((response) => {
+        dispatch(deleteMeal(id))
+      })
+      .catch((response) => {
+        dispatch({
+          type: MealConstants.DELETE_MEAL_FROM_SERVER_ERROR,
+          error: response.errors[0].msg
+        });
+      });
+  });
 }
 
 function loadMeals() {

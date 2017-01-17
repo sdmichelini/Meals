@@ -48,6 +48,10 @@ const mealReducer = (state=initialState, action) => {
       alert(action.error);
       break;
     }
+    case MealConstants.DELETE_MEAL_FROM_SERVER_ERROR: {
+      alert(action.error);
+      break;
+    }
     default: {
       break;
     }
