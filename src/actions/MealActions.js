@@ -1,4 +1,6 @@
-import MealConstants from '../constants/MealConstants';
+import MealConstants from '../constants/MealConstants'
+
+import MealsApi from '../utils/MealsApi'
 
 /*
  Add meal objects
@@ -31,4 +33,30 @@ export function deleteMeal(id) {
     type: MealConstants.DELETE_MEAL,
     id: id
   }
+}
+
+function loadMeals() {
+  return {
+    type: MealConstants.LOAD_MEALS
+  }
+}
+
+function loadMealsError(error) {
+  return {
+    type: MealConstants.LOAD_MEALS_ERROR,
+    error: error
+  }
+}
+
+export function fetchMeals() {
+  return ((dispatch) => {
+    dispatch(loadMeals);
+    MealsApi.getMeals()
+      .then((response) => {
+        dispatch(addMeals(response.meals));
+      })
+      .catch((response) => {
+        dispatch(loadMealsError(response.errors[0].msg));
+      });
+  });
 }

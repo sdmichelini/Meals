@@ -40,6 +40,13 @@ const mealReducer = (state=initialState, action) => {
       }
       break;
     }
+    case MealConstants.LOAD_MEALS_ERROR: {
+      alert(action.error);
+      break;
+    }
+    default: {
+      break;
+    }
   }
   return state;
 }
