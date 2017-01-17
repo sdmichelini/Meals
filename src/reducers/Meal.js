@@ -1,11 +1,21 @@
-import MealConstants from '../constants/MealConstants';
+import MealConstants from '../constants/MealConstants'
+import MealValidator from '../common/MealValidator'
 
 const initialState = {meals: []};
 const mealReducer = (state=initialState, action) => {
   switch(action.type) {
     case MealConstants.ADD_MEALS: {
       if(action.meals) {
-        state = {...state, meals: state.meals.concat(action.meals)};
+        //Only add verified meals
+        let verified_meals = [];
+        for(let meal of action.meals) {
+          if(MealValidator.validateMeal(meal)) {
+            verified_meals = verified_meals.concat({...meal});
+          } else {
+            alert('Invalid Meal!')
+          }
+        }
+        state = {...state, meals: state.meals.concat(verified_meals)};
       }
       break;
     }

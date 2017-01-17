@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class MealListComponent extends Component {
   render() {
     const meals = this.props.meals.map((meal)=> {
-      return (<MealListItem meal={meal} key={meal.id}></MealListItem>)
+      return (<MealListItem meal={meal} key={meal._id}></MealListItem>)
     })
     return (
       <div>

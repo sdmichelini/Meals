@@ -20,8 +20,12 @@ export default class NewMealForm extends Component {
   onMealSubmit(e) {
     //Don't let page reload
     e.preventDefault();
-    const meals = [{name: this.state.name, id: 1}];
+    // TODO: Get MongoDB to Generate ID
+    const meals = [{name: this.state.name, _id: Date.now()}];
     Store.dispatch(MealActions.addMeals(meals));
+    this.setState({
+      name: ''
+    })
   }
 
   /*
@@ -37,9 +41,9 @@ export default class NewMealForm extends Component {
     return (
       <form onSubmit={this.onMealSubmit.bind(this)}>
         Name:
-        <input type='text' value={this.state.name} onChange={this.onNameChange.bind(this)}/>
+        <input type='text' className='form-control' value={this.state.name} onChange={this.onNameChange.bind(this)}/>
 
-        <button type='submit'>Create Meal</button>
+        <button className='btn btn-success' type='submit'>Create Meal</button>
       </form>
     )
   }
