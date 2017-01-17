@@ -1,0 +1,3 @@
+/*
+ Database independent starting point for the Express Application
+*/
