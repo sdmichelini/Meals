@@ -11,6 +11,26 @@ export function addMeals(meals) {
     meals: meals
   }
 }
+/*
+  Add meal to server
+*/
+export function addMealToServer(meal) {
+  return((dispatch) => {
+    dispatch({
+      type: MealConstants.ADD_MEAL_TO_SERVER
+    });
+    MealsApi.addMeal(meal)
+      .then((response) => {
+        dispatch(addMeals([response.meal]));
+      })
+      .catch((response) => {
+        dispatch({
+          type: MealConstants.ADD_MEAL_TO_SERVER_ERROR,
+          error: response.errors[0].msg
+        })
+      });
+  });
+}
 
 /*
  Edit the meal.

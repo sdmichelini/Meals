@@ -44,6 +44,10 @@ const mealReducer = (state=initialState, action) => {
       alert(action.error);
       break;
     }
+    case MealConstants.ADD_MEAL_TO_SERVER_ERROR: {
+      alert(action.error);
+      break;
+    }
     default: {
       break;
     }

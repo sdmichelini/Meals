@@ -21,11 +21,11 @@ export default class NewMealForm extends Component {
     //Don't let page reload
     e.preventDefault();
     // TODO: Get MongoDB to Generate ID
-    const meals = [{name: this.state.name, _id: Date.now()}];
-    Store.dispatch(MealActions.addMeals(meals));
+    const meal = {name: this.state.name, _id: Date.now()};
+    Store.dispatch(MealActions.addMealToServer(meal));
     this.setState({
       name: ''
-    })
+    });
   }
 
   /*

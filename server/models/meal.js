@@ -1,7 +1,7 @@
 /*
   Model for the meals
 */
-
+'use strict';
 // cache
 let MEALS = [];
 
