@@ -62,13 +62,10 @@ describe('Meals Test',()=>{
     it('should cascade a delete of a meal to all the associated ingredients', () => {
       return meal_model.deleteMeal(meal_id)
         .then((count) => {
-          console.log('TEST'+meal_id)
-          count = count.result.n;
           expect(count).to.equal(1);
-          ingredient_model.getIngredientsForMeal(meal_id);
+          return ingredient_model.getIngredientsForMeal(meal_id);
         })
         .then((ingredients) => {
-          console.log(ingredients);
           expect(ingredients).to.be.an('array');
           expect(ingredients.length).to.equal(0);
         });

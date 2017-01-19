@@ -43,7 +43,6 @@ function populateMeals() {
 function getMeals() {
   return new Promise((resolve, reject) => {
     if(need_update && collection) {
-      console.log('here');
       collection.find({}).toArray((err, meals) => {
         if(err) {
           reject(err);
@@ -86,14 +85,14 @@ function deleteMeal(id) {
       return reject(new Error('Invalid ID'));
     } else {
       let obj_id = new ObjectId(id);
-      collection.remove({'_id':obj_id}, (err, count) => {
+      collection.remove({'_id':obj_id}, (err, result) => {
         if(err) {
           return reject(err);
         } else {
           MEALS = MEALS.filter((meal) => {return meal._id != id});
           ingredient.deleteAllIngredientForMeal(id)
-            .then((count) => {
-              return resolve(count);
+            .then(() => {
+              return resolve(result.result.n);
             });
         }
       });
