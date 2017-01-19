@@ -22,7 +22,6 @@ function initDb(db) {
       reject(new Error(err));
     });
   }
-
 }
 
 function populateMeals() {
