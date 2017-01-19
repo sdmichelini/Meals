@@ -7,6 +7,8 @@ const expect = chai.expect;
 const request = require('superagent');
 
 const meal_model = require('../models/meal');
+// For Integration Tests
+const ingredient_model = require('../models/ingredient');
 
 describe('Meals Test',()=>{
   describe('Unit Tests', ()=>{
@@ -44,6 +46,32 @@ describe('Meals Test',()=>{
             return meal_model.deleteMeal(String(_meal._id));
           });
       });
+    });
+  });
+  describe('Model Integration Tests', ()=>{
+    let meal_id;
+    before(() => {
+      // Create a mock meal with an igrediant
+      const meal = {name:'Parfait'};
+      return meal_model.addMeal(meal)
+        .then((_meal) => {
+          meal_id = String(_meal._id);
+          return ingredient_model.createIngredient('Mock Ingredient', 'X','X', meal_id);
+        });
+    });
+    it('should cascade a delete of a meal to all the associated ingredients', () => {
+      return meal_model.deleteMeal(meal_id)
+        .then((count) => {
+          console.log('TEST'+meal_id)
+          count = count.result.n;
+          expect(count).to.equal(1);
+          ingredient_model.getIngredientsForMeal(meal_id);
+        })
+        .then((ingredients) => {
+          console.log(ingredients);
+          expect(ingredients).to.be.an('array');
+          expect(ingredients.length).to.equal(0);
+        });
     });
   });
   describe('End-to-end Tests', ()=> {

@@ -5,6 +5,8 @@
 // cache
 let MEALS = [];
 
+const ingredient = require('./ingredient');
+
 let collection = undefined;
 let need_update = true;
 
@@ -88,8 +90,11 @@ function deleteMeal(id) {
         if(err) {
           return reject(err);
         } else {
-          return resolve(count);
           MEALS = MEALS.filter((meal) => {return meal._id != id});
+          ingredient.deleteAllIngredientForMeal(id)
+            .then((count) => {
+              return resolve(count);
+            });
         }
       });
     }
