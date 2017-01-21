@@ -98,6 +98,7 @@ export function fetchMeals() {
         dispatch(addMeals(response.meals));
       })
       .catch((response) => {
+        console.log(response);
         dispatch(loadMealsError(response.errors[0].msg));
       });
   });

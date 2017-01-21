@@ -9,7 +9,7 @@ let collection;
 
 function initDb(db) {
   if(db) {
-    collection = db.collection('meals');
+    collection = db.collection('ingredients');
   }
 }
 

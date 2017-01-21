@@ -29,7 +29,7 @@ class MealListComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    meals: state.meals
+    meals: state.meals.meals
   }
 }
 // Use connect to get the store values and pass them as props to the meal list component
