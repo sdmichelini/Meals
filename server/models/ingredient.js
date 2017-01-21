@@ -55,7 +55,19 @@ function deleteAllIngredientForMeal(meal_id) {
 }
 
 function deleteIngredient(id) {
-
+  return new Promise((resolve, reject) => {
+    if(!id || id.length != 24) {
+      return reject(new Error('Invalid ID'));
+    } else {
+      collection.remove({'_id': new ObjectId(id)}, (err, result)=>{
+        if(err) {
+          return reject(err);
+        } else {
+          return resolve(result.result);
+        }
+      });
+    }
+  });
 }
 
 module.exports = {

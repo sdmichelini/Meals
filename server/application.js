@@ -13,6 +13,7 @@ require('dotenv').config();
 
 // Load our controllers
 const meals = require('./controllers/meals');
+const ingredients = require('./controllers/ingredients');
 
 //Start application vars
 let app = express();
@@ -24,9 +25,14 @@ app.get('/api/health', (req,res)=>{
   res.json({message:'OK.'});
 });
 
+// Meals Module
 app.get('/api/meals', meals.getMeals);
 app.post('/api/meals' ,bodyParser.json() ,meals.addMeal);
 app.delete('/api/meals/:id', meals.deleteMeal);
+
+app.get('/api/ingredients', ingredients.getIngredientsForMeal);
+app.post('/api/ingredients', bodyParser.json(), ingredients.createIngredient);
+app.delete('/api/ingredients/:id', ingredients.deleteIngredient);
 
 //Unhandled route
 app.use('/api/*', (req,res)=>{
