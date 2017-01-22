@@ -5,6 +5,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import CreateIngredient from './CreateIngredient'
 import IngredientDetail from './IngredientDetail'
 import * as MealActions from '../actions/MealActions'
 import Store from '../Store'
@@ -30,6 +31,7 @@ class MealDetailComponent extends Component {
           <h1>{ meal.name }</h1>
           <IngredientDetail mealId={this.props.params.id} />
           <p className='text-muted'>{'Loading Reviews...'}</p>
+          <CreateIngredient mealId={this.props.params.id} />
         </div>
       )
     } else {

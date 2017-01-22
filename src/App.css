@@ -1,1 +1,12 @@
+.ingredient-list {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
 
+.ingredient-list-item {
+  border-style: solid;
+  margin-bottom: 4px;
+  padding: 4px;
+  background-color: #E0F2F1;
+}

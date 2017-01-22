@@ -13,6 +13,7 @@ class MealListComponent extends Component {
   }
   render() {
     const meals = this.props.meals.map((meal)=> {
+      console.log(meal);
       return (<MealListItem meal={meal} key={meal._id}></MealListItem>)
     })
     return (
