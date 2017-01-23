@@ -19,7 +19,7 @@ class MealListComponent extends Component {
     return (
       <div>
         <h1>Meal List</h1>
-        <ul>
+        <ul className='meal-list'>
           { meals }
         </ul>
         <NewMealForm />

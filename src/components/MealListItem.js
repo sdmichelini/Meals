@@ -14,10 +14,13 @@ export default class MealListItem extends Component {
 
   render() {
     return (
-      <li>
-        <Link to={'/meals/'+String(this.props.meal._id)}>{ this.props.meal.name }</Link>
-        <div className='pull-right'>
-          <button onClick={this.onDelete.bind(this)} className='btn btn-danger'>Delete</button>
+      <li className='meal-list-item'>
+
+        <h4><Link to={'/meals/'+String(this.props.meal._id)}>{ this.props.meal.name }</Link></h4><button onClick={this.onDelete.bind(this)} className='btn btn-danger'>Delete</button>
+
+
+        <div className='text-right'>
+
         </div>
       </li>
     )
