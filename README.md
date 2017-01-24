@@ -6,3 +6,9 @@ this application is to be able to track ingredients for large meals along with w
 ## Getting Started
 
 View [Redux Tutorial](https://www.youtube.com/watch?v=1w-oQ-i1XB8&list=PLoYCgNOIyGADILc3iUJzygCqC8Tt3bRXt) to familiarize yourself with the concepts of Redux.
+
+### To-do List
+
+- [ ] Implement Delete Ingredients on Client
+- [ ] Add Authentication
+- [ ] Add Navigation Bar
