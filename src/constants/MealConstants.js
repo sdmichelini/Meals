@@ -9,5 +9,6 @@ export default keyMirror({
   LOAD_MEALS: null,
   LOAD_MEALS_ERROR: null,
   DELETE_MEAL_FROM_SERVER: null,
-  DELETE_MEAL_FROM_SERVER_ERROR: null
+  DELETE_MEAL_FROM_SERVER_ERROR: null,
+  FLUSH_LOCAL_MEALS: null
 });
