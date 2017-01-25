@@ -9,6 +9,6 @@ View [Redux Tutorial](https://www.youtube.com/watch?v=1w-oQ-i1XB8&list=PLoYCgNOI
 
 ### To-do List
 
-- [ ] Implement Delete Ingredients on Client
+- [x] Implement Delete Ingredients on Client
 - [ ] Add Authentication
 - [ ] Add Navigation Bar

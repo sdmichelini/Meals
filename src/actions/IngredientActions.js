@@ -44,10 +44,10 @@ export function removeIngredient(id) {
     dispatch({type: IngredientConstants.REMOVE_INGREDIENTS});
     IngredientsApi.deleteIngredient(id)
       .then((response)=>{
-        dispatch(removeIngredient(id));
+        dispatch(deleteIngredient(id));
       })
       .catch((response)=>{
-        dispatch({type: IngredientConstants.REMOVE_INGREDIENTS, error:response.errors[0].msg})
+        dispatch({type: IngredientConstants.REMOVE_INGREDIENTS_ERROR, error:response.errors[0].msg})
       });
   });
 }
