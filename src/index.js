@@ -13,7 +13,7 @@ import Store from './Store'
 
 ReactDOM.render(
   <Provider store={ Store }>
-    <div className='container'>
+    <div className='container-fluid'>
       <Router history={hashHistory}>
         <Route path='/' component={App}/>
         <Route path='/meals/:id' component={MealDetail}/>

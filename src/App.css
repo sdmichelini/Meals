@@ -1,3 +1,33 @@
+.container-fluid {
+  padding: 0 !important;
+}
+
+.navbar-custom {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  width: 100%;
+}
+
+.nav-list {
+  display: block;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  background-color: #f2f4f7;
+  height: 50px;
+}
+
+.nav-list-item {
+  display: inline;
+
+}
+
+.nav-list-item > a {
+  display: inline;
+  padding: 10px;
+}
+
 .ingredient-list {
   list-style: none;
   padding: 0px;

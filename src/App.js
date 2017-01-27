@@ -13,7 +13,9 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <MealList />
+        <div className='container'>
+          <MealList />
+        </div>
       </div>
     );
   }

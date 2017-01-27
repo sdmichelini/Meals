@@ -3,15 +3,13 @@ import { Link } from 'react-router'
 
 class NavBarComponent extends Component {
   render() {
-    return (<nav className='navbar navbar-default'>
-      <div className='container-fluid'>
-        <div className='navbar-header'>
-          <Link to='/' className='navbar-brand'>Meals</Link>
-        </div>
-        <ul className='navbar-nav'>
-          <li><Link to='/'>Shopping List</Link></li>
+    return (
+      <nav className='navbar-custom'>
+        <ul className='nav-list'>
+          <li className='nav-list-item header'><Link to='/'>Meals</Link></li>
+          <li className='nav-list-item'><Link to='/'>Lists</Link></li>
+          <li className='nav-list-item'><Link to='/'>Ratings</Link></li>
         </ul>
-      </div>
     </nav>)
   }
 }
