@@ -11,6 +11,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const meal_model = require('../models/meal');
 const ingredient_model = require('../models/ingredient');
+const shopping_list_model = require('../models/shopping-list');
 
 describe('Server Tests', ()=>{
   const port = process.env.PORT || 3001;
@@ -24,6 +25,7 @@ describe('Server Tests', ()=>{
       }
       meal_model.initDb(_db);
       ingredient_model.initDb(_db);
+      shopping_list_model.initDb(_db);
       db = _db;
       server = app.listen(port, done);
     });
@@ -38,4 +40,5 @@ describe('Server Tests', ()=>{
   require('./server.test');
   require('./meals.test');
   require('./ingredients.test');
+  require('./shopping-list.test');
 });

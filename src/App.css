@@ -12,7 +12,8 @@
 .nav-list {
   display: block;
   list-style: none;
-  padding: 0px;
+  padding-left: 0px;
+  padding-top: 5px;
   margin: 0px;
   background-color: #f2f4f7;
   height: 50px;
@@ -20,12 +21,33 @@
 
 .nav-list-item {
   display: inline;
+  font-family: 'Tahoma';
+  font-size: 1.4em;
+  color: #4ea035;
+}
 
+.header {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .nav-list-item > a {
   display: inline;
   padding: 10px;
+  color: #4ea035;
+}
+
+.nav-list-item > a:hover {
+  background-color: #e2e4e7;
+  color: #3e9025;
+  text-decoration: none;
+}
+
+.nav-list-item:hover {
+  background-color: #e2e4e7;
+  color: #3e9025;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .ingredient-list {

@@ -6,6 +6,7 @@ const mealReducer = (state=initialState, action) => {
   switch(action.type) {
     case MealConstants.ADD_MEALS: {
       if(action.meals) {
+        console.log('ADDING MEALS');
         //Only add verified meals
         let verified_meals = [];
         for(let meal of action.meals) {
@@ -42,6 +43,10 @@ const mealReducer = (state=initialState, action) => {
     }
     case MealConstants.LOAD_MEALS_ERROR: {
       alert(action.error);
+      break;
+    }
+    case MealConstants.FLUSH_LOCAL_MEALS: {
+      state = {...state, meals: []};
       break;
     }
     case MealConstants.ADD_MEAL_TO_SERVER_ERROR: {

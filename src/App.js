@@ -11,10 +11,10 @@ import NavBar from './components/NavBar'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className='container-fluid'>
         <NavBar />
         <div className='container'>
-          <MealList />
+          { this.props.children }
         </div>
       </div>
     );

@@ -93,6 +93,7 @@ function loadMealsError(error) {
 export function fetchMeals() {
   return ((dispatch) => {
     dispatch(loadMeals);
+    dispatch({type: MealConstants.FLUSH_LOCAL_MEALS});
     MealsApi.getMeals()
       .then((response) => {
         dispatch(addMeals(response.meals));

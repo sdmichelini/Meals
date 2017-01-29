@@ -13,12 +13,11 @@ class MealListComponent extends Component {
   }
   render() {
     const meals = this.props.meals.map((meal)=> {
-      console.log(meal);
       return (<MealListItem meal={meal} key={meal._id}></MealListItem>)
     })
     return (
       <div>
-        <h1>Meal List</h1>
+        <h1>Meal Repository</h1>
         <ul className='meal-list'>
           { meals }
         </ul>
