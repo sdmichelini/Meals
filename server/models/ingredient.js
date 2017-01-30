@@ -19,6 +19,7 @@ function getIngredientsForMeal(meal_id) {
       if(err) {
         return reject(err);
       } else {
+        console.log(meals);
         return resolve(meals);
       }
     });

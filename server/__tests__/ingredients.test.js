@@ -58,7 +58,7 @@ describe('Ingrediants Test',() => {
   });
   describe('End-to-end tests', ()=> {
     describe('GET /api/ingredients', ()=>{
-      const meal_id = 'meal1';
+      const meal_id = 'meal10';
 
       const ingredient_1 = {meal_id: meal_id, name: 'Chicken', amount: '2 pounds', details: 'Sam\'s Club'};
       const ingredient_2 = {meal_id: meal_id, name: 'Beef', amount: '2 pounds', details: 'Sam\'s Club'};

@@ -39,6 +39,7 @@ describe('Server Tests', ()=>{
   });
   require('./server.test');
   require('./meals.test');
-  require('./ingredients.test');
   require('./shopping-list.test');
+  require('./ingredients.test');
+
 });

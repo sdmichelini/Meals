@@ -48,5 +48,53 @@ describe('Shopping List Test', () => {
           });
       });
     });
+    describe('model#updateIngredientOnList()', () => {
+      let validList = {name: 'Week of 1/29'};
+      let i_id = 'xyz;'
+      let validIngredient = {id: i_id};
+      before(() => {
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+            return model.addIngredientsToList([validIngredient.id], validList._id);
+          })
+          .then((ingredient) => {
+            validIngredient = ingredient;
+          });
+      });
+      it('should update an ingredient', () => {
+        return model.updateIngredientOnList(true, i_id, validList._id)
+        .then((ingredient) => {
+          console.log(ingredient);
+          expect(ingredient).to.have.property('_id');
+          expect(ingredient.id).to.equal(validIngredient.id);
+          expect(ingredient.purchased).to.equal(true);
+        });
+      });
+    });
+    describe('model#removeIngredientFromList()', () => {
+      let validList = {name: 'Week of 1/29'};
+      let i_id = 'bac'
+      let validIngredient = {id: i_id};
+      before(() => {
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+            return model.addIngredientsToList([validIngredient.id], validList._id);
+          })
+          .then((ingredient) => {
+            validIngredient = ingredient;
+          });
+      });
+      it('should remove an ingredient from the list and return the new list without the ingredient', () => {
+        return model.removeIngredientFromList(validIngredient.id, validList._id)
+        .then((list) => {
+          expect(list).to.be.an('array');
+          for(let ingredient of list) {
+            expect(ingredient._id).to.not.equal(validIngredient.id);
+          }
+        });
+      });
+    });
   });
 });
