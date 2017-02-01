@@ -116,8 +116,22 @@ module.exports = {
     });
   },
   removeIngredientFromList: (ingredient_id, list_id) => {
-    return new Promise((resolve, reject) {
-      return new Error('Not Implemented');
-    })
+    return new Promise((resolve, reject) => {
+      getIngredientsForList(list_id)
+        .then((list) => {
+          let new_ingredients = list.ingredients.filter((item) => {return item._id != ingredient_id});
+          list_collection.update({'_id': new ObjectId(list_id)}, {$set: {ingredients: new_ingredients}}, (err, result) => {
+            if(err) {
+              reject(err);
+            } else {
+              resolve(new_ingredients);
+            }
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
+    });
   }
 }

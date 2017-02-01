@@ -65,7 +65,6 @@ describe('Shopping List Test', () => {
       it('should update an ingredient', () => {
         return model.updateIngredientOnList(true, i_id, validList._id)
         .then((ingredient) => {
-          console.log(ingredient);
           expect(ingredient).to.have.property('_id');
           expect(ingredient.id).to.equal(validIngredient.id);
           expect(ingredient.purchased).to.equal(true);
