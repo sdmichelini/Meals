@@ -8,6 +8,7 @@
     "chai-as-promised": "^6.0.0",
     "keymirror": "^0.1.1",
     "mocha": "^3.2.0",
+    "node-mocks-http": "^1.5.6",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.1",
     "react-scripts": "0.8.5",
