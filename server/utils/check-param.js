@@ -6,11 +6,13 @@
 module.exports = (params) => {
   return (req, res, next) => {
     if(!req.body) {
-      next(new Error('Error: No Body.'));
+      res.status(400);
+      next(new Error('No Body.'));
     } else {
       for(let param of params) {
         if(!req.body[param]) {
-          next(new Error('Error: No '+param+' in body.'));
+          res.status(400);
+          next(new Error('No '+param+' in body.'));
           return;
         }
       }

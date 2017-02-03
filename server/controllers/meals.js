@@ -21,9 +21,7 @@ function getMeals(req, res) {
 }
 
 function addMeal(req, res) {
-  if(!req.body || !req.body.meal) {
-    res.status(400).json(utils.generateError('Error: No Meal Found in Body'));
-  } else if(!req.body.meal.name) {
+  if(!req.body.meal.name) {
     res.status(400).json(utils.generateError('Error: No Name Found in Meal'));
   } else {
     // Only one property is tranfered

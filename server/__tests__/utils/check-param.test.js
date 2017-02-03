@@ -47,6 +47,7 @@ describe('Check Parameter Middleware', ()=>{
     request.body = params;
     middleware(['message', 'rates'])(request, response, function next(error) {
       expect(error).to.be.ok;
+      expect(response.statusCode).to.equal(400);
       done(); // call done so we can run the next test
     });
   });

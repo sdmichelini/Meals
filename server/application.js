@@ -8,6 +8,8 @@ const cors = require('cors');
 const utils = require('./utils/response');
 const bodyParser = require('body-parser');
 
+const checkParam = require('./utils/check-param');
+
 // Load our config vars
 require('dotenv').config();
 
@@ -27,12 +29,21 @@ app.get('/api/health', (req,res)=>{
 
 // Meals Module
 app.get('/api/meals', meals.getMeals);
-app.post('/api/meals' ,bodyParser.json() ,meals.addMeal);
+app.post('/api/meals' ,bodyParser.json() ,checkParam(['meal']) ,meals.addMeal);
 app.delete('/api/meals/:id', meals.deleteMeal);
 
 app.get('/api/ingredients', ingredients.getIngredientsForMeal);
-app.post('/api/ingredients', bodyParser.json(), ingredients.createIngredient);
+app.post('/api/ingredients', bodyParser.json(), checkParam(['ingredient']), ingredients.createIngredient);
 app.delete('/api/ingredients/:id', ingredients.deleteIngredient);
+
+//Handle Client Side Errors
+app.use((err, req, res, next) => {
+  if(res.statusCode == 400) {
+    res.json(utils.generateError(err.message));
+  } else {
+    next(err);
+  }
+})
 
 //Unhandled route
 app.use('/api/*', (req,res)=>{

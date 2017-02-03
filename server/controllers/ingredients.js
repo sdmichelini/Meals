@@ -19,9 +19,7 @@ function getIngredientsForMeal(req, res) {
 }
 
 function createIngredient(req, res) {
-  if(!req.body.ingredient) {
-    res.status(400).json(utils.generateError('No Ingredient in Request'));
-  } else if(!req.body.ingredient.name){
+  if(!req.body.ingredient.name){
     res.status(400).json(utils.generateError('No Ingredient Name'));
   } else if(!req.body.ingredient.amount){
     res.status(400).json(utils.generateError('No Ingredient Amount'));
