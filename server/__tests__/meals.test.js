@@ -119,7 +119,7 @@ describe('Meals Test',()=>{
           .send({_meal: meal})
           .end((err, res) => {
             expect(res.status).to.equal(400);
-            expect(res.body.errors[0].msg).to.equal('No meal in body.');
+            expect(res.body.errors[0].msg).to.equal('No meal.name in body.');
             done();
           });
       });

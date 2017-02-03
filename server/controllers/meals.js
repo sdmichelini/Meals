@@ -21,25 +21,21 @@ function getMeals(req, res) {
 }
 
 function addMeal(req, res) {
-  if(!req.body.meal.name) {
-    res.status(400).json(utils.generateError('Error: No Name Found in Meal'));
-  } else {
-    // Only one property is tranfered
-    // Validate the name
+  // Only one property is tranfered
+  // Validate the name
 
-    let meal = {name: req.body.meal.name};
-    meal = validator.validateMeal(meal);
-    if(meal) {
-      meal_model.addMeal(meal)
-        .then((_meal) => {
-          res.status(201).json({meal: _meal});
-        })
-        .catch((err) => {
-          res.status(500).json(utils.generateError('Error: Internal Server Error'));
-        });
-    } else {
-      res.status(400).json(utils.generateError('Error: Invalid Meal Name'));
-    }
+  let meal = {name: req.body.meal.name};
+  meal = validator.validateMeal(meal);
+  if(meal) {
+    meal_model.addMeal(meal)
+      .then((_meal) => {
+        res.status(201).json({meal: _meal});
+      })
+      .catch((err) => {
+        res.status(500).json(utils.generateError('Error: Internal Server Error'));
+      });
+  } else {
+    res.status(400).json(utils.generateError('Error: Invalid Meal Name'));
   }
 }
 

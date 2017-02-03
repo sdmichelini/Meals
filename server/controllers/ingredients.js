@@ -19,23 +19,15 @@ function getIngredientsForMeal(req, res) {
 }
 
 function createIngredient(req, res) {
-  if(!req.body.ingredient.name){
-    res.status(400).json(utils.generateError('No Ingredient Name'));
-  } else if(!req.body.ingredient.amount){
-    res.status(400).json(utils.generateError('No Ingredient Amount'));
-  } else if(!req.body.ingredient.meal_id){
-    res.status(400).json(utils.generateError('No Ingredient Meal ID'));
-  } else {
-    const ingredient = req.body.ingredient;
-    ingredient_model.createIngredient(ingredient.name, ingredient.amount, ingredient.details || undefined, ingredient.meal_id)
-    .then((_ingredient) => {
-      res.status(201).json({ingredient: _ingredient});
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).generateError('Internal Server Error.');
-    })
-  }
+  const ingredient = req.body.ingredient;
+  ingredient_model.createIngredient(ingredient.name, ingredient.amount, ingredient.details || undefined, ingredient.meal_id)
+  .then((_ingredient) => {
+    res.status(201).json({ingredient: _ingredient});
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).generateError('Internal Server Error.');
+  });
 }
 
 function deleteIngredient(req, res) {

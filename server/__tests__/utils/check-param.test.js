@@ -51,4 +51,30 @@ describe('Check Parameter Middleware', ()=>{
       done(); // call done so we can run the next test
     });
   });
+  it('should not have an error when passed a deep object if present', (done)=>{
+    const params = {list: {name: 'Jeff'}};
+    request.body = params;
+    middleware(['list.name'])(request, response, function next(error) {
+      if (error) { throw error }
+      done(); // call done so we can run the next test
+    });
+  });
+  it('should have an error when root object is not present', (done)=>{
+    const params = {list: undefined};
+    request.body = params;
+    middleware(['list.name'])(request, response, function next(error) {
+      expect(error).to.be.ok;
+      expect(response.statusCode).to.equal(400);
+      done(); // call done so we can run the next test
+    });
+  });
+  it('should have an error when nested object is not present', (done)=>{
+    const params = {list: {bill: true}};
+    request.body = params;
+    middleware(['list.name'])(request, response, function next(error) {
+      expect(error).to.be.ok;
+      expect(response.statusCode).to.equal(400);
+      done(); // call done so we can run the next test
+    });
+  });
 });

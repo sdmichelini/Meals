@@ -96,4 +96,57 @@ describe('Shopping List Test', () => {
       });
     });
   });
+  describe('End to End Tests', ()=> {
+    describe('GET /api/shopping-lists', ()=>{
+      it('should get a list of all of the shopping lists', (done)=>{
+        request.get('http://localhost:3001/api/shopping-lists')
+          .end((err, res) => {
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('lists');
+            expect(res.body.lists).to.be.an('array');
+            done();
+          });
+      });
+    });
+    describe('GET /api/shopping-lists/:id', ()=>{
+      let validList = {name: 'Week of 1/29'};
+      before(()=>{
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+          });
+      });
+      it('should get a single shopping list', (done)=>{
+        request.get('http://localhost:3001/api/shopping-lists/'+validList._id)
+          .end((err, res) => {
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('list');
+            expect(res.body.list).to.be.an('object');
+            expect(res.body.list).to.have.property('ingredients');
+            expect(res.body.list.ingredients).to.be.an('array');
+            done();
+          });
+      });
+      it('should have a 404 if no list is found', (done)=>{
+        request.get('http://localhost:3001/api/shopping-lists/not-found')
+          .end((err, res) => {
+            expect(err).to.be.ok;
+            expect(res.status).to.equal(404);
+            done();
+          });
+      });
+    });
+    describe('POST /api/shopping-lists', ()=>{
+      it('should add a new shopping list',(done)=>{
+        const new_list = {name: 'Week of 1/29'};
+        request.post('http://localhost:3001/api/shopping-lists/')
+          .send({list: new_list})
+          .end((err, res) => {
+            expect(err).to.not.be.ok;
+            expect(res.status).to.equal(201);
+            done();
+          });
+      });
+    });
+  });
 });
