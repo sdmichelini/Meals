@@ -127,11 +127,11 @@ describe('Shopping List Test', () => {
             done();
           });
       });
-      it('should have a 404 if no list is found', (done)=>{
+      it('should have a 400 if bad list id is supplied', (done)=>{
         request.get('http://localhost:3001/api/shopping-lists/not-found')
           .end((err, res) => {
             expect(err).to.be.ok;
-            expect(res.status).to.equal(404);
+            expect(res.status).to.equal(400);
             done();
           });
       });
@@ -144,6 +144,90 @@ describe('Shopping List Test', () => {
           .end((err, res) => {
             expect(err).to.not.be.ok;
             expect(res.status).to.equal(201);
+            done();
+          });
+      });
+    });
+    describe('PUT /api/shopping-lists/:id', ()=>{
+      let validList = {name: 'Week of 1/29'};
+      before(()=>{
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+          });
+      });
+      it('should add an ingredient to an existing shopping list', (done)=>{
+        request.put('http://localhost:3001/api/shopping-lists/'+validList._id)
+          .send({ids: ['xyz', 'ryx']})
+          .end((err, res) => {
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('list');
+            expect(res.body.list).to.be.an('object');
+            expect(res.body.list).to.have.property('ingredients');
+            expect(res.body.list.ingredients).to.be.an('array');
+            done();
+          });
+      });
+    });
+    describe('PUT /api/shopping-lists/:id/ingredients/:ingredient_id', ()=>{
+      let validList = {name: 'Week of 1/29'};
+      let i_id = 'xyz;'
+      let validIngredient = {id: i_id};
+      before(() => {
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+            return model.addIngredientsToList([validIngredient.id], validList._id);
+          })
+          .then((ingredient) => {
+            validIngredient = ingredient;
+          });
+      });
+      it('should update an ingredient to true', (done) => {
+        request.put('http://localhost:3001/api/shopping-lists/'+validList._id+'/ingredients/'+i_id)
+          .send({purchased: true})
+          .end((err, res) => {
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('ingredient');
+            expect(res.body.ingredient).to.have.property('purchased');
+            expect(res.body.ingredient.purchased).to.equal(true);
+            done();
+          });
+      });
+      it('should update an ingredient to false', (done) => {
+        request.put('http://localhost:3001/api/shopping-lists/'+validList._id+'/ingredients/'+i_id)
+          .send({purchased: false})
+          .end((err, res) => {
+            console.log(res.body);
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('ingredient');
+            expect(res.body.ingredient).to.have.property('purchased');
+            expect(res.body.ingredient.purchased).to.equal(false);
+            done();
+          });
+      });
+    });
+    describe('DELETE /api/shopping-lists/:id/ingredients/:ingredient_id', ()=>{
+      let validList = {name: 'Week of 1/29'};
+      let i_id = 'xyz;'
+      let validIngredient = {id: i_id};
+      before(() => {
+        return model.createList(validList)
+          .then((list) => {
+            validList = list;
+            return model.addIngredientsToList([validIngredient.id], validList._id);
+          })
+          .then((ingredient) => {
+            validIngredient = ingredient;
+          });
+      });
+      it('should delete the ingredient from the list',(done)=>{
+        request.delete('http://localhost:3001/api/shopping-lists/'+validList._id+'/ingredients/'+i_id)
+          .end((err, res) => {
+            console.log(res.body);
+            expect(err).to.not.be.ok;
+            expect(res.body).to.have.property('ingredients');
+            expect(res.body.ingredients).to.be.an('array');
             done();
           });
       });

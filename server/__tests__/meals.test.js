@@ -131,9 +131,15 @@ describe('Meals Test',()=>{
           .then((_meal)=>{
             return request.delete('http://localhost:3001/api/meals/'+String(_meal._id))
               .then((res)=>{
+
                 expect(res.status).to.equal(200);
                 expect(res.body).to.have.property('msg');
                 expect(res.body.msg).to.be.an('string');
+              })
+              .catch((err)=>{
+                console.log(err);
+                console.log(_meal._id)
+                expect(1).to.equal(0);
               });
           });
       });

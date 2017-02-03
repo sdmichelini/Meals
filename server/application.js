@@ -8,7 +8,9 @@ const cors = require('cors');
 const utils = require('./utils/response');
 const bodyParser = require('body-parser');
 
-const checkParam = require('./utils/check-param');
+const checkBody = require('./utils/check-param').checkBody;
+const checkParam = require('./utils/check-param').checkParam;
+const checkMongoId = require('./utils/check-param').checkMongoId;
 
 // Load our config vars
 require('dotenv').config();
@@ -30,16 +32,19 @@ app.get('/api/health', (req,res)=>{
 
 // Meals Module
 app.get('/api/meals', meals.getMeals);
-app.post('/api/meals' ,bodyParser.json() ,checkParam(['meal.name']) ,meals.addMeal);
-app.delete('/api/meals/:id', meals.deleteMeal);
+app.post('/api/meals' ,bodyParser.json() ,checkBody(['meal.name']) ,meals.addMeal);
+app.delete('/api/meals/:id', checkMongoId, meals.deleteMeal);
 
 app.get('/api/ingredients', ingredients.getIngredientsForMeal);
-app.post('/api/ingredients', bodyParser.json(), checkParam(['ingredient','ingredient.name','ingredient.amount','ingredient.meal_id']), ingredients.createIngredient);
-app.delete('/api/ingredients/:id', ingredients.deleteIngredient);
+app.post('/api/ingredients', bodyParser.json(), checkBody(['ingredient','ingredient.name','ingredient.amount','ingredient.meal_id']), ingredients.createIngredient);
+app.delete('/api/ingredients/:id', checkMongoId,ingredients.deleteIngredient);
 
 app.get('/api/shopping-lists', shoppingLists.getShoppingLists);
-app.get('/api/shopping-lists/:id', shoppingLists.getShoppingListById);
-app.post('/api/shopping-lists/', bodyParser.json(), checkParam(['list.name']), shoppingLists.createShoppingList);
+app.get('/api/shopping-lists/:id', checkMongoId,shoppingLists.getShoppingListById);
+app.post('/api/shopping-lists/', bodyParser.json(), checkBody(['list.name']), shoppingLists.createShoppingList);
+app.put('/api/shopping-lists/:id', checkMongoId,bodyParser.json(), checkBody(['ids']), shoppingLists.addToShoppingList);
+app.put('/api/shopping-lists/:id/ingredients/:ingredient_id', checkMongoId, checkParam(['ingredient_id']),bodyParser.json(), checkBody(['purchased']), shoppingLists.updateIngredientOnList)
+app.delete('/api/shopping-lists/:id/ingredients/:ingredient_id', checkMongoId, checkParam(['ingredient_id']),shoppingLists.removeIngredientFromList)
 
 //Handle Client Side Errors
 /*

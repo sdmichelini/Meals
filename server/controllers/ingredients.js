@@ -31,17 +31,13 @@ function createIngredient(req, res) {
 }
 
 function deleteIngredient(req, res) {
-  if(!req.params.id) {
-    res.status(400).json(utils.generateError('No ID in Request'));
-  } else {
-    ingredient_model.deleteIngredient(req.params.id)
-      .then((result) => {
-        res.json({msg: 'Deleted '+result.n+' records'});
-      })
-      .catch((err) => {
-        res.status(500).json(utils.generateError('Internal Server Error.'));
-      });
-  }
+  ingredient_model.deleteIngredient(req.params.id)
+    .then((result) => {
+      res.json({msg: 'Deleted '+result.n+' records'});
+    })
+    .catch((err) => {
+      res.status(500).json(utils.generateError('Internal Server Error.'));
+    });
 }
 
 module.exports = {

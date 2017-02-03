@@ -40,17 +40,13 @@ function addMeal(req, res) {
 }
 
 function deleteMeal(req, res) {
-  if(!req.params.id) {
-    res.status(400).json(utils.generateError('Error: No ID Found'));
-  } else {
-    meal_model.deleteMeal(req.params.id)
-      .then((count)=>{
-        res.json({msg: 'Deleted'});
-      })
-      .catch((err)=>{
-        res.status(500).json(utils.generateError('Error: Internal Server Error'));
-      });
-  }
+  meal_model.deleteMeal(req.params.id)
+    .then((count)=>{
+      res.json({msg: 'Deleted'});
+    })
+    .catch((err)=>{
+      res.status(500).json(utils.generateError('Error: Internal Server Error'));
+    });
 }
 
 module.exports = {
