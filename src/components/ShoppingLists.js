@@ -4,6 +4,8 @@ import Store from '../Store'
 
 import * as ShoppingListActions from '../actions/ShoppingListActions'
 
+import CreateShoppingList from './CreateShoppingList'
+
 /*
   This component will render the shopping lists
 */
@@ -23,6 +25,12 @@ const FetchFailure = () => {
           </div>)
 }
 
+const NoLists = () => {
+  return (<p className='text-muted'>
+    { 'There are no shopping lists.' }
+  </p>)
+}
+
 class ShoppingLists extends Component {
   componentDidMount() {
     Store.dispatch(ShoppingListActions.fetchLists());
@@ -32,8 +40,13 @@ class ShoppingLists extends Component {
       return (<FetchingLists />)
     } else if(this.props.error) {
       return (<FetchFailure />)
-    } else {
-      return <p>How did this happen?</p>
+    } else if(this.props.lists.length == 0){
+      return (<div>
+                <NoLists />
+                <CreateShoppingList />
+              </div>)
+    } else{
+      return (<CreateShoppingList />)
     }
 
   }

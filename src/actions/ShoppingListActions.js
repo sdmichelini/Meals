@@ -5,16 +5,20 @@ const flushLists = {type: ShoppingsListsConstants.FLUSH_LISTS};
 const apiCall = {type: ShoppingsListsConstants.API_CALL};
 const apiFail = {type: ShoppingsListsConstants.API_ERROR};
 
+function addLists(lists) {
+  return { type:ShoppingsListsConstants.ADD_LISTS,
+          lists: lists};
+}
+
 export function fetchLists() {
   return ((dispatch) => {
-    console.log('here');
     // Clear what we have
     dispatch(flushLists);
     dispatch(apiCall);
 
     ShoppingListApi.getShoppingLists()
       .then((response) => {
-
+        dispatch(addLists(response.lists));
       })
       .catch((err) => {
         dispatch(apiFail);

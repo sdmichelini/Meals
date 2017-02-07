@@ -10,6 +10,7 @@ export default keyMirror({
   FLUSH_LISTS: null,
   CREATE_LIST: null,
   ADD_LIST_ITEMS: null,
+  ADD_LISTS: null,
   UPDATE_LIST_ITEM: null,
   REMOVE_FROM_LIST: null
 });
