@@ -10,7 +10,8 @@ export default {
     return new Promise((resolve, reject) => {
       request.get(URL+'/api/shopping-lists')
         .end((err,response) => {
-          if(err) reject(JSON.parse(response.text));
+          if(err && response && response.text) reject(JSON.parse(response.text));
+          else if(err) reject('API Error');
           resolve(JSON.parse(response.text));
         });
     });
@@ -66,7 +67,8 @@ export default {
     return new Promise((resolve, reject) => {
       request.delete(URL+'/api/shopping-lists/'+id+'/ingredients/'+ingredient_id)
         .end((err,response) => {
-          if(err) reject(JSON.parse(response.text));
+          if(err && response && response.text) reject(JSON.parse(response.text));
+          else if(err) reject('API Error');
           resolve(JSON.parse(response.text));
         });
     });

@@ -10,10 +10,12 @@ import ReduxThunk from 'redux-thunk'
 
 import MealReducer from './reducers/Meal'
 import IngredientReducer from './reducers/Ingredient'
+import ShoppingListReducer from './reducers/ShoppingLists'
 
 let store = createStore(combineReducers({
   meals: MealReducer,
-  ingredients: IngredientReducer
+  ingredients: IngredientReducer,
+  shoppingLists: ShoppingListReducer
 }),applyMiddleware(ReduxThunk));
 
 export default store;
