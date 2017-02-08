@@ -26,7 +26,11 @@ export default class CreateShoppingList extends Component {
   }
 
   createShoppingList(e) {
-
+    e.preventDefault();
+    if(this.state.name) {
+      Store.dispatch(ShoppingListActions.createList(this.state.name));
+    }
+    this.setState(initialState);
   }
 
   onNameChange(e) {
@@ -46,7 +50,7 @@ export default class CreateShoppingList extends Component {
             Name:
             <input type='text' className='form-control' value={this.state.name} onChange={this.onNameChange.bind(this)} required/>
 
-            <button type='submit' className='btn btn-success' onClick={this.createShoppingList.bind(this)}>Add Shopping List</button>
+            <button type='submit' className='btn btn-success'>Add Shopping List</button>
           </form>
         </div>
       );

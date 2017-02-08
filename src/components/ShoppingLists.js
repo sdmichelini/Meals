@@ -31,6 +31,10 @@ const NoLists = () => {
   </p>)
 }
 
+const ListItem = (props) => {
+  return (<li className='meal-list-item'>{ props.list.name }</li>);
+}
+
 class ShoppingLists extends Component {
   componentDidMount() {
     Store.dispatch(ShoppingListActions.fetchLists());
@@ -46,7 +50,16 @@ class ShoppingLists extends Component {
                 <CreateShoppingList />
               </div>)
     } else{
-      return (<CreateShoppingList />)
+      let lists = this.props.lists.map((list) => {
+        return (<ListItem key={list._id} list={list} />);
+      });
+      return (
+      <div>
+        <ul className='meal-list'>
+          { lists }
+        </ul>
+        <CreateShoppingList />
+      </div>);
     }
 
   }

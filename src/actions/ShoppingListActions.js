@@ -28,3 +28,19 @@ export function fetchLists() {
       });
   });
 }
+
+export function createList(name) {
+  return ((dispatch) => {
+    dispatch(apiCall);
+    ShoppingListApi.createShoppingList(name)
+      .then((response) => {
+        dispatch(addLists([response.list]));
+      })
+      .catch((err) => {
+        dispatch(apiFail);
+        if(err) {
+          alert(err);
+        }
+      });
+  });
+}
