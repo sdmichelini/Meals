@@ -30,6 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:server": "mocha -R Spec -b server/__tests__/index.js",
+    "cover:server": "istanbul cover --hook-run-in-context node_modules/mocha/bin/_mocha -- -R Spec -b server/__tests__/index.js",
     "eject": "react-scripts eject"
   }
 }
